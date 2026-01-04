@@ -1,6 +1,5 @@
-
 {
-  "name": "Senku Bot",
+  "name": "gura",
   "version": "1.0.0",
   "description": "Wa - bot Multi Device",
   "main": "index.js",
@@ -22,7 +21,7 @@
   "url": ""
   },  
   "bugs": {
-    "url": "https://github.com/Andresv27728"
+    "url": "https://github.com/meado-learner/Adonix/issues"
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {

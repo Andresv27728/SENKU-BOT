@@ -1,11 +1,11 @@
-
 import { watchFile, unwatchFile } from "fs"
 import chalk from "chalk"
 import { fileURLToPath } from "url"
 import fs from "fs"
 import path from "path"
+
 global.botNumber = ""
-global.owner = ["573133374132" ""]
+global.owner = ["573133374132" , "573107648804","51900373696"]
 global.suittag = [""]
 global.prems = []
 global.id_canal = ["120363399729727124@newsletter"]
@@ -36,7 +36,7 @@ export const defaultSettings = {
     banner: "https://files.catbox.moe/v8bvm3.jpg",
     icono: "https://files.catbox.moe/hoyzld.jpg"
 }
-/* No tocar*/
+
 Object.assign(global, defaultSettings)
 
 function leerSubBotConfig(senderBotNumber) {
