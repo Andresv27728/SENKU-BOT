@@ -5,7 +5,7 @@ import fs from "fs"
 import path from "path"
 
 global.botNumber = ""
-global.owner = ["573133374132" , "573107648804","51900373696"]
+global.owner = ["573133374132" , ""]
 global.suittag = [""]
 global.prems = []
 global.id_canal = ["120363399729727124@newsletter"]
