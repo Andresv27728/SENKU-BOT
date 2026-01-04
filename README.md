@@ -1,3 +1,4 @@
+
 <div align="center"
 style="
 border: 4px solid;
@@ -18,10 +19,6 @@ border-radius: 14px;
 
 # 🧪⚡ **SENKU-BOT** ⚡🧪  
 ### *¡10 mil millones por ciento funcional!*
-
-<img src="https://i.imgur.com/6XH7QzO.gif" width="520"/>
-
-<br>
 
 <img src="https://img.shields.io/badge/Node.js-18%2B-brightgreen?style=for-the-badge&logo=node.js" />
 <img src="https://img.shields.io/badge/Baileys-Latest-blue?style=for-the-badge" />
@@ -158,7 +155,7 @@ https://github.com/Andresv27728
 
 🔬 Si **SENKU-BOT** te parece increíble:
 - ⭐ Dale una estrella al repositorio  
-- 🔁 Comparte el experimento  
+- 🔁 Compártelo  
 - 🧠 Contribuye con ideas  
 
 ---
@@ -183,4 +180,4 @@ border-radius: 16px;
 ### ⚡ *¡Esto es ciencia pura!* ⚡  
 ### *¡10 mil millones por ciento real!* 🧪
 
-</div> 
+</div>
