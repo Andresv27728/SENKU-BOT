@@ -1,13 +1,11 @@
-/* código creado por 💖💝 Y⃟o⃟ S⃟o⃟y⃟ Y⃟o⃟ 💝 💖 dejar créditos*/
+
 import { watchFile, unwatchFile } from "fs"
 import chalk from "chalk"
 import { fileURLToPath } from "url"
 import fs from "fs"
 import path from "path"
-/* agregate como owner */
 global.botNumber = ""
-global.owner = ["573133374132" """]
-/* No tocar podrías dañar múltiples comandos*/
+global.owner = ["573133374132" ""]
 global.suittag = [""]
 global.prems = []
 global.id_canal = ["120363399729727124@newsletter"]
