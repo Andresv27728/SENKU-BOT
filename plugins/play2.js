@@ -1,0 +1,232 @@
+import fetch from "node-fetch"
+import yts from "yt-search"
+
+async function ytmp4(url) {
+  const headers = {
+    "accept": "*/*",
+    "accept-language": "id-ID,id;q=0.9,en-US;q=0.9",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\"",
+    "sec-ch-ua-mobile": "?1",
+    "sec-ch-ua-platform": "\"Android\"",
+    "Referer": "https://id.ytmp3.mobi/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  }
+
+  const initial = await fetch(
+    `https://d.ymcdn.org/api/v1/init?p=y&23=1llum1n471&_=${Math.random()}`,
+    { headers }
+  )
+  const init = await initial.json()
+
+  const id = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/|.*embed\/))([^&?/]+)/
+  )?.[1]
+  if (!id) throw "ID inválido"
+
+  const convert = await (
+    await fetch(
+      `${init.convertURL}&v=${id}&f=mp4&_=${Math.random()}`,
+      { headers }
+    )
+  ).json()
+
+  let info
+  for (let i = 0; i < 5; i++) {
+    info = await (await fetch(convert.progressURL, { headers })).json()
+    if (info.progress === 3) break
+  }
+
+  return {
+    url: convert.downloadURL,
+    title: info.title
+  }
+}
+
+let handler = async (m, { conn, text }) => {
+  if (!text) throw "🎬 Ingresa nombre o link"
+
+  const isUrl = /youtu/i.test(text)
+  let videoUrl = text
+  let title = ""
+
+  await conn.sendMessage(m.chat, { react: { text: '🔎', key: m.key } })
+
+  let msg = await conn.sendMessage(
+    m.chat,
+    { text: `🔍 *Buscando en YouTube...*
+⏳ Por favor espera...` },
+    { quoted: m }
+  )
+
+  try {
+    // 🔎 BÚSQUEDA
+    if (!isUrl) {
+      const search = await yts(text)
+      const video = search.videos[0]
+      if (!video) throw "Sin resultados"
+      videoUrl = video.url
+      title = video.title
+    }
+
+    await conn.sendMessage(m.chat, {
+      text: `⬇️ *Descargando:* ${title || "video"}`,
+      edit: msg.key
+    })
+    await conn.sendMessage(m.chat, { react: { text: '🎥', key: m.key } } )
+
+    // 📥 DESCARGA
+    const video = await ytmp4(videoUrl)
+    title = video.title || title
+
+    // 🎞️ ENVIAR VIDEO
+    await conn.sendMessage(
+      m.chat,
+      {
+        video: { url: video.url },
+        mimetype: "video/mp4",
+        caption: '‎'
+      },
+      { quoted: m }
+    )
+
+    await conn.sendMessage(m.chat, {
+      text: `✅ *Descargado con éxito:* ${title}`,
+      edit: msg.key
+    })
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } } )
+
+  } catch (err) {
+    console.error(err)
+
+    await conn.sendMessage(m.chat, {
+      text: "❌ No se pudo enviar el video",
+      edit: msg.key
+    })
+  }
+}
+
+handler.help = ["play2 <nombre o enlace>"]
+handler.tags = ["descargas"]
+handler.command = ["play2"]
+
+export default handler
+
+
+
+/*import fetch from "node-fetch"
+import yts from "yt-search"
+import { ytmp4 } from "ruhend-scraper"
+
+// ====================== 🎄 DECORACIONES RANDOM 🎄 ======================= //
+const christmasBorders = [
+"🎄✨❄️✨🎄","☃️🎁✨🎄✨🎁☃️","🎅🏻🎄🌟🎄🎅🏻","❄️🔔🎄🔔❄️","🎁✨☃️✨🎁",
+"🎄🎀✨🎀🎄","🎅✨🎄✨🎅","❄️☃️🎄☃️❄️","🔔🎄⭐🎄🔔","🎁🎄🎅🏻🎄🎁"
+]
+
+const B = () => christmasBorders[Math.floor(Math.random() * christmasBorders.length)]
+// ====================================================================== //
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `${B()}\n🎬 *Uso:* ${usedPrefix + command} <nombre o link>\n${B()}`
+  m.react('🎥')
+
+  try {
+    const isUrl = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(text)
+    let videoUrl = text
+    let title = "Video desconocido"
+    let author = "YouTube"
+    let thumbnail = null
+    let finalUrl = null
+
+    // 🔍 Buscar si no es URL
+    if (!isUrl) {
+      const search = await yts(text)
+      const video = search.videos[0]
+      if (!video) throw "❌ No se encontró el video"
+      videoUrl = video.url
+      title = video.title
+      author = video.author?.name || "Desconocido"
+      thumbnail = video.thumbnail
+    }
+
+    // 🎯 MÉTODO 1 — API ZELAPI (PRINCIPAL)
+    try {
+      const query = encodeURIComponent(videoUrl)
+      const res = await fetch(
+        `https://zelapioffciall.koyeb.app/download/youtube?url=${query}`
+      )
+      const json = await res.json()
+
+      if (json.status && json.video?.length) {
+        title = json.meta?.title || title
+        thumbnail = json.meta?.thumbnail || thumbnail
+
+        // Prioridad de calidad
+        const qualities = ["1080p", "720p", "480p", "360p", "240p", "144p"]
+        for (const q of qualities) {
+          const v = json.video.find(v => v.quality === q && v.format === "mp4")
+          if (v) {
+            finalUrl = v.download
+            break
+          }
+        }
+      }
+    } catch {}
+
+    // 🧯 MÉTODO 2 — RESPALDO ruhend-scraper
+    if (!finalUrl) {
+      try {
+        const data = await ytmp4(videoUrl)
+        finalUrl = data?.video || data?.mp4
+        title = data?.title || title
+        thumbnail = data?.thumbnail || thumbnail
+      } catch {}
+    }
+
+    if (!finalUrl) throw "❌ No se pudo obtener el video"
+
+    // 📄 Info
+    await conn.sendMessage(m.chat, {
+      text: `${B()}\n🎬 *${title}*\n📺 YouTube\n${B()}`
+    })
+
+    // ⬇️ Descargar
+    const res = await fetch(finalUrl)
+    if (!res.ok) throw "❌ Error al descargar"
+    const buffer = Buffer.from(await res.arrayBuffer())
+    const sizeMB = buffer.byteLength / (1024 * 1024)
+
+    // 📤 Envío
+    if (sizeMB <= 45) {
+      await conn.sendMessage(m.chat, {
+        video: buffer,
+        caption: `🎞️ ${title}`,
+        mimetype: "video/mp4"
+      })
+    } else {
+      await conn.sendMessage(m.chat, {
+        document: buffer,
+        fileName: sanitizeFilename(`${title}.mp4`),
+        mimetype: "video/mp4",
+        caption: `📦 ${title} (Documento)`
+      })
+    }
+
+    m.react('✅')
+  } catch (e) {
+    console.error(e)
+    m.react('❌')
+    m.reply(`${B()}\n❌ Falló el proceso\n${B()}`)
+  }
+}
+
+// 🧼 Limpiar nombre
+function sanitizeFilename(name) {
+  return name.replace(/[\\/:"*?<>|]+/g, "").substring(0, 80)
+}
+
+handler.help = ["play2 <video>"]
+handler.tags = ["descargas"]
+handler.command = ["play2"]
+
+export default handler*/
