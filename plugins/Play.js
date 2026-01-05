@@ -160,12 +160,6 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     else await conn.sendMessage(chatId, { text: caption }, { quoted: m })
   } catch {}
 
-  const apiKey = globalThis?.apikey
-  if (!apiKey) {
-    await conn.sendMessage(chatId, { text: `「✦」Falta configurar globalThis.apikey para usar la API.` }, { quoted: m })
-    return
-  }
-
   let apiResp = null
   try {
     const apiUrl =
