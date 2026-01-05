@@ -149,11 +149,13 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   const duration = ytInfo?.timestamp || 'Desconocida'
   const thumbnail = ytInfo?.thumbnail
 
-  const caption =
-    `「✦」Enviando *${title}*\n\n` +
-    `> ❀ Canal » *${author}*\n` +
-    `> ⴵ Duración » *${duration}*\n` +
-    `> 🜸 Link » ${ytUrl}`
+  const caption = `🎧 *Reproduciendo*
+━━━━━━━━━━━━━━
+📌 *Título:* ${title}
+👤 *Canal:* ${author}
+⏱️ *Duración:* ${duration}
+🔗 *Link:* ${ytUrl}
+━━━━━━━━━━━━━━`
 
   try {
     if (thumbnail) await conn.sendMessage(chatId, { image: { url: thumbnail }, caption }, { quoted: m })
