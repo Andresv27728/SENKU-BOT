@@ -6,104 +6,87 @@ import path from "path"
 const TMP_DIR = path.join(process.cwd(), "tmp")
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(
-      m.chat,
-      `Usa el comando así:\n\n${usedPrefix + command} nombre de la canción`,
-      m
-    )
-  }
+if (!text) {
+return conn.reply(
+m.chat,
+❌ Usa el comando así:\n\n${usedPrefix + command} nombre de la canción,
+m
+)
+}
 
-  try {
-    // Crear carpeta tmp
-    if (!fs.existsSync(TMP_DIR)) {
-      fs.mkdirSync(TMP_DIR, { recursive: true })
-    }
+try {
+// 📂 Crear carpeta tmp si no existe
+if (!fs.existsSync(TMP_DIR)) {
+fs.mkdirSync(TMP_DIR, { recursive: true })
+}
 
-    // Buscar en YouTube
-    const search = await yts(text)
-    if (!search.videos?.length) {
-      return conn.reply(m.chat, "No se encontraron resultados.", m)
-    }
+// 🔍 Buscar en YouTube  
+const search = await yts(text)  
+if (!search.videos || search.videos.length === 0) {  
+  return conn.reply(m.chat, "❌ No se encontraron resultados.", m)  
+}  
 
-    const video = search.videos[0]
-    const videoUrl = video.url
+// 🎵 Primer resultado  
+const video = search.videos[0]  
+const videoUrl = video.url  
 
-    // Llamar API
-    const apiUrl =
-      "https://gawrgura-api.onrender.com/download/ytmp3?url=" +
-      encodeURIComponent(videoUrl)
+// 📡 Llamar a la API  
+const apiUrl = `https://gawrgura-api.onrender.com/download/ytmp3?url=${encodeURIComponent(videoUrl)}`  
+const res = await fetch(apiUrl)  
+const json = await res.json()  
 
-    const res = await fetch(apiUrl, {
-      headers: {
-        "user-agent": "Mozilla/5.0",
-        "accept": "application/json"
-      }
-    })
+if (!json.status || !json.result) {  
+  return conn.reply(m.chat, "❌ Error al descargar el audio.", m)  
+}  
 
-    if (!res.ok) {
-      throw new Error(`API error ${res.status}`)
-    }
+// 🧾 Nombre del archivo  
+const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, "")  
+const filePath = path.join(TMP_DIR, `${safeTitle}.mp3`)  
 
-    const json = await res.json()
+// ⬇️ Descargar el audio a tmp/  
+const audioRes = await fetch(json.result)  
+const buffer = await audioRes.arrayBuffer()  
+fs.writeFileSync(filePath, Buffer.from(buffer))  
 
-    if (!json.status || !json.result) {
-      return conn.reply(m.chat, "Error al convertir el audio.", m)
-    }
+// ℹ️ Información  
+let info = `
 
-    const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, "")
-    const filePath = path.join(TMP_DIR, `${safeTitle}.mp3`)
+🎧 Reproduciendo
+━━━━━━━━━━━━━━
+📌 Título: ${video.title}
+👤 Canal: ${video.author.name}
+⏱️ Duración: ${video.timestamp}
+👁️ Vistas: ${video.views.toLocaleString()}
+━━━━━━━━━━━━━━
+`
 
-    // Descargar MP3
-    const audioRes = await fetch(json.result, {
-      headers: { "user-agent": "Mozilla/5.0" }
-    })
+await conn.sendMessage(  
+  m.chat,  
+  {  
+    image: { url: video.thumbnail },  
+    caption: info.trim()  
+  },  
+  { quoted: m }  
+)  
 
-    if (!audioRes.ok) {
-      throw new Error("Error descargando el audio")
-    }
+// 🔊 Enviar audio desde archivo local  
+await conn.sendMessage(  
+  m.chat,  
+  {  
+    audio: fs.readFileSync(filePath),  
+    mimetype: "audio/mp3",  
+    fileName: `${safeTitle}.mp3`  
+  },  
+  { quoted: m }  
+)  
 
-    const buffer = Buffer.from(await audioRes.arrayBuffer())
-    fs.writeFileSync(filePath, buffer)
+// 🧹 Borrar archivo después de enviar  
+fs.unlinkSync(filePath)
 
-    // Info
-    const info = `
-Reproduciendo
-────────────
-Título: ${video.title}
-Canal: ${video.author.name}
-Duración: ${video.timestamp}
-Vistas: ${video.views.toLocaleString()}
-────────────
-`.trim()
-
-    await conn.sendMessage(
-      m.chat,
-      {
-        image: { url: video.thumbnail },
-        caption: info
-      },
-      { quoted: m }
-    )
-
-    // Enviar audio
-    await conn.sendMessage(
-      m.chat,
-      {
-        audio: fs.readFileSync(filePath),
-        mimetype: "audio/mpeg",
-        fileName: `${safeTitle}.mp3`,
-        ptt: false
-      },
-      { quoted: m }
-    )
-
-    fs.unlinkSync(filePath)
-
-  } catch (err) {
-    console.error(err)
-    conn.reply(m.chat, "Ocurrió un error al procesar el audio.", m)
-  }
+} catch (e) {
+console.error(e)
+conn.reply(m.chat, "❌ Ocurrió un error inesperado.", m)
+}
 }
 
 handler.help = ["play <canción>"]
