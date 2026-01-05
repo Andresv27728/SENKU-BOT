@@ -1,5 +1,9 @@
 import fetch from "node-fetch"
 import yts from "yt-search"
+import fs from "fs"
+import path from "path"
+
+const TMP_DIR = path.join(process.cwd(), "tmp")
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
@@ -11,6 +15,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 
   try {
+    // 📂 Crear carpeta tmp si no existe
+    if (!fs.existsSync(TMP_DIR)) {
+      fs.mkdirSync(TMP_DIR, { recursive: true })
+    }
+
     // 🔍 Buscar en YouTube
     const search = await yts(text)
     if (!search.videos || search.videos.length === 0) {
@@ -30,7 +39,16 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(m.chat, "❌ Error al descargar el audio.", m)
     }
 
-    // ℹ️ Información antes del audio
+    // 🧾 Nombre del archivo
+    const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, "")
+    const filePath = path.join(TMP_DIR, `${safeTitle}.mp3`)
+
+    // ⬇️ Descargar el audio a tmp/
+    const audioRes = await fetch(json.result)
+    const buffer = await audioRes.arrayBuffer()
+    fs.writeFileSync(filePath, Buffer.from(buffer))
+
+    // ℹ️ Información
     let info = `
 🎧 *Reproduciendo*
 ━━━━━━━━━━━━━━
@@ -50,16 +68,19 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       { quoted: m }
     )
 
-    // 🔊 Enviar audio
+    // 🔊 Enviar audio desde archivo local
     await conn.sendMessage(
       m.chat,
       {
-        audio: { url: json.result },
+        audio: fs.readFileSync(filePath),
         mimetype: "audio/mpeg",
-        fileName: `${video.title}.mp3`
+        fileName: `${safeTitle}.mp3`
       },
       { quoted: m }
     )
+
+    // 🧹 Borrar archivo después de enviar
+    fs.unlinkSync(filePath)
 
   } catch (e) {
     console.error(e)
@@ -71,4 +92,4 @@ handler.help = ["play <canción>"]
 handler.tags = ["descargas"]
 handler.command = ["play"]
 
-export default handler
+export default handler 
