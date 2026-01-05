@@ -73,7 +73,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       m.chat,
       {
         audio: fs.readFileSync(filePath),
-        mimetype: "audio/mpeg",
+        mimetype: "audio/mp3",
         fileName: `${safeTitle}.mp3`
       },
       { quoted: m }
