@@ -61,6 +61,6 @@ let handler = async (m, { conn, text }) => {
 handler.help = ['update']
 handler.tags = ['owner']
 handler.command = ['update', 'actualizar', 'fix']
-handler.rowner = true
+handler.rowner = false
 
 export default handler
