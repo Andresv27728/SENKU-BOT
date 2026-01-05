@@ -170,8 +170,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     const apiUrl =
       `https://api-adonix.ultraplus.click/download/ytaudio` +
-      `?apikey=${encodeURIComponent(String(apiKey))}` +
-      `&url=${encodeURIComponent(String(ytUrl))}`
+      `?apikey=Adofreekey&url=${encodeURIComponent(String(ytUrl))}`
 
     apiResp = await fetchJson(apiUrl, HTTP_TIMEOUT_MS)
   } catch (e) {
