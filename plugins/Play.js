@@ -31,7 +31,7 @@ const video = search.videos[0]
 const videoUrl = video.url  
 
 // 📡 Llamar a la API  
-const apiUrl = `https://gawrgura-api.onrender.com/download/ytmp3?url=${encodeURIComponent(videoUrl)}`  
+const apiUrl = `https://gawrgura-api.onrender.com/download/ytmp3?url=${encodeURIComponent(text)}`  
 const res = await fetch(apiUrl)  
 const json = await res.json()  
 
