@@ -56,7 +56,7 @@ border-radius: 14px;
 📥 Descargas de audio y video  
 🎨 Menús decorados  
 🧠 Código organizado  
-⚡ Rendimiento estable  
+⚡ Rendimiento estable.  
 
 ---
 
