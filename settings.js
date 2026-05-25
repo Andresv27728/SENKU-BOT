@@ -26,6 +26,8 @@ global.ch = {
 ch1: "120363399729727124@newsletter"
 }
 
+global.api = "AQUÍ TU API KEY"
+
 export const defaultSettings = {
     botname: "𝒮𝑒𝓃𝓀𝓊 𝐼𝓈𝒽𝒾𝑔𝒶𝓂𝒾",
     textbot: "𝒮𝑒𝓃𝓀𝓊 𝐼𝓈𝒽𝒾𝑔𝒶𝓂𝒾",
