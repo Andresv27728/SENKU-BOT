@@ -27,7 +27,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     for (let [i, v] of results.entries()) {
       txt += `${BORDER_LEFT}\n`
-      txt += `📌 *${i + 1}. ${v.title || "Sin título"}*\n`
+      txt += `🎁 *${i + 1}. ${v.title || "Sin título"}*\n`
       txt += `👤 Autor: ${v.author?.nickname || "Desconocido"}\n`
       txt += `🎵 Música: ${v.music_info?.title || "N/A"}\n`
       txt += `👁️‍🗨️ Vistas: ${v.play_count?.toLocaleString() || "0"}\n`
@@ -35,7 +35,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       txt += `${BORDER_RIGHT}\n\n`
     }
 
-    txt += `${BORDER_LEFT}\n *FIN DE RESULTADOS*\n${BORDER_RIGHT}`
+    txt += `${BORDER_LEFT}\n✨ *FIN DE RESULTADOS* ✨\n${BORDER_RIGHT}`
 
     // Miniatura
     let thumb = results[0]?.cover || results[0]?.origin_cover || null
