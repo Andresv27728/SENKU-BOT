@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import { toAudio } from '../lib/converter.js'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `「✦」Escribe el nombre o link del video.\n> ✐ Ejemplo » *${usedPrefix + command} lovely*`
@@ -32,11 +33,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }, { quoted: m })
 
     if (mp3Url) {
+      const resAudio = await fetch(mp3Url)
+      const audioBuffer = Buffer.from(await resAudio.arrayBuffer())
+
+      const converted = await toAudio(audioBuffer, 'mp3')
+
       await conn.sendMessage(m.chat, {
-        audio: { url: mp3Url },
+        audio: converted.data,
         mimetype: 'audio/mpeg',
         fileName: `${title}.mp3`
       }, { quoted: m })
+
+      await converted.delete()
       await m.react('✅')
     } else {
       throw '「✦」No se pudo obtener el enlace de descarga MP3.'
