@@ -18,9 +18,18 @@ import Pino from 'pino'
 import path, { join, dirname } from 'path'
 import { Boom } from '@hapi/boom'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
+import {
+  isLid, isLidConverted, lidToJid, lidToJidSafe, extractNumber,
+  resolveLidFromParticipants, resolveAnyLidToJid, convertLidArray,
+  decodeAndNormalize, resolveParticipant, getParticipantJid, getParticipantJids,
+  findParticipantByNumber, cacheParticipantLids, getCachedJid,
+  normalizeToPhoneNumber, cacheLidJid, resolveFromSock, getLidCacheSize,
+  savePersistentCache, cleanNumber, toJid, fromJid, formatDisplay,
+  isValidPhoneNumber as isValidPhoneNumberLid, normalizeJid
+} from './lid.js'
 import { Low, JSONFile } from 'lowdb'
 import store from './lib/store.js'
-const { proto } = (await import('@whiskeysockets/baileys')).default
+const { proto } = await import('@whiskeysockets/baileys')
 import pkg from 'google-libphonenumber'
 const { PhoneNumberUtil } = pkg
 const phoneUtil = PhoneNumberUtil.getInstance()
@@ -61,6 +70,22 @@ global.timestamp = {start: new Date}
 const __dirname = global.__dirname(import.meta.url)
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 global.prefix = new RegExp('^[#!./-]')
+
+// === Utilidades globales de números (lid.js) ===
+global.cleanNumber = cleanNumber
+global.toJid = toJid
+global.fromJid = fromJid
+global.formatDisplay = formatDisplay
+global.isValidPhoneNumber = isValidPhoneNumberLid
+global.normalizeJid = normalizeJid
+global.lidUtils = {
+  isLid, isLidConverted, lidToJid, lidToJidSafe, extractNumber,
+  resolveLidFromParticipants, resolveAnyLidToJid, convertLidArray,
+  decodeAndNormalize, resolveParticipant, getParticipantJid, getParticipantJids,
+  findParticipantByNumber, cacheParticipantLids, getCachedJid,
+  normalizeToPhoneNumber, cacheLidJid, resolveFromSock, getLidCacheSize,
+  savePersistentCache
+}
 
 global.db = new Low(/https?:\/\//.test(opts['db'] || '') ? new cloudDBAdapter(opts['db']) : new JSONFile('database.json'))
 global.DATABASE = global.db;
