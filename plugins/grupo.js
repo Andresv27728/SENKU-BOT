@@ -10,7 +10,7 @@ let handler = async (m, { conn }) => {
 
     // 🧩 Borde seguro: corto y consistente (mismo patrón a ambos lados)
     const LEFT = "🔬🧪⚗️";   // borde izquierdo (puedes cambiar los 3 emojis por otros)
-    const RIGHT = "🔔❄️🌟";  // borde derecho (idem)
+    const RIGHT = "🔬🧪⚗️";  // borde derecho
 
     // ✅ Construimos líneas y las decoramos con el borde de forma segura
     const lines = [

@@ -3,7 +3,7 @@ import fetch from "node-fetch"
 import { prepareWAMessageMedia, generateWAMessageFromContent } from "@whiskeysockets/baileys"
 
 //  Bordes aleatorios
-const christmasBorders = [
+const randomBorders = [
   "🌌🔭🧪🔬👨‍🔬👩‍🔬",
   "🌌⚛️🧪⚗️🔬🔭",
   "⚛️⚗️🧪🔬🌌⚛️",
@@ -12,7 +12,7 @@ const christmasBorders = [
 ]
 
 function randomBorder() {
-  return christmasBorders[Math.floor(Math.random() * christmasBorders.length)]
+  return randomBorders[Math.floor(Math.random() * randomBorders.length)]
 }
 
 // Genera un contacto falso con miniatura
@@ -56,16 +56,16 @@ let handler = async (m, { conn, args, command }) => {
         }
       })
 
-    // ❄️ Categoría seleccionada
+    // Categoría seleccionada
     if (args[0] && categories[args[0]]) {
       let comandos = categories[args[0]]
         .map(cmd => ` *${cmd}*`)
         .join('\n')
 
-      let text = `${randomBorder()}\n *Laboratorio de Senku* 🎅🏻\n${randomBorder()}
+      let text = `${randomBorder()}\n *Laboratorio de Senku*\n${randomBorder()}
 
 🧪 *Categoría:* ${args[0]}
-❄️ *Comandos disponibles:*
+📌 *Comandos disponibles:*
 
 ${comandos || 'No hay comandos en esta categoría.'}
 
@@ -87,7 +87,7 @@ ${randomBorder()}`
       ? "🤖 𝔅𝔬𝔱 𝔓𝔯𝔦𝔫𝔠𝔦𝔭𝔞𝔩"
       : "🤖 𝒮𝓊𝒷 𝐵𝑜𝓉"
 
-    // 🎄 CABECERA NAVIDEÑA
+    // CABECERA
     const border = randomBorder()
     const headerText = `${border}
 *LABORATORIO DE SENKU* 
@@ -111,14 +111,14 @@ ${border}`
 
     // 📂 Lista de categorías
     const rows = Object.keys(categories).map(cat => ({
-      title: `🎄 ${cat}`,
-      description: `Comandos navideños de ${cat}`,
+      title: `▸ ${cat}`,
+      description: `Comandos de ${cat}`,
       id: `.menu ${cat}`
     }))
 
     const interactiveMessage = {
       body: { text: `${headerText}\n\n *Elige una categoría para continuar:*` },
-      footer: { text: "❄️ Laboratorio de Senku 🌟" },
+      footer: { text: "⚙️ Laboratorio de Senku" },
       header: {
         title: " MENÚ PRINCIPAL",
         hasMediaAttachment: true,
@@ -147,7 +147,7 @@ ${border}`
     await conn.relayMessage(m.chat, msgSend.message, { messageId: msgSend.key.id })
   } catch (e) {
     console.error(e)
-    m.reply("💥❄️ Error.")
+    m.reply("💥 Error.")
   }
 }
 

@@ -1,47 +1,21 @@
-// 🎄 COMANDO: ping NAVIDAD ULTRA DECORADO
+// COMANDO: ping
 import moment from 'moment-timezone'
 
-// 🎁 100 DECORACIONES NAVIDEÑAS RANDOM
-const XMAS_DECO = [
-"🎄","🎁","✨","❄️","☃️","🎅","🦌","🔔","🌟","🧦","🍪","🥛","🕯️","⛄","🎀","🍬","🎆","🧚",
-"🌲","🎉","🍫","🎶","📯","🥁","🛷","🍎","🌌","❇️","🎊","🧸","🍰","🥧","🍷","🕯","🧣","🧤",
-"🌠","🏔️","❄","🌬️","🎇","🧁","🫖","🍵","🧂","🔮","🕯","🪄","🎭","🧵","🪢","🪅","🪔","💝",
-"🕊️","📦","🦙","🦊","🦝","🦢","🦉","🎐","🎗️","🎟️","🎫","🪙","💫","🎱","🎯","🛎️","🎞️",
-"📜","📖","📚","📘","📕","📗","📙","🕰️","⏳","💡","🔦","✨","⭐","🌟","🌈","💚","❤️","💛",
-"🤍","💖","💗","💞","💓","💟","☘️","🌿","🌺","🌸","🪷","🕊"
+const DECO = ["⚡", "🔥", "💎", "⚡", "✨", "🌟", "🔮", "⚙️"]
+const BORDES = [
+  "━━━━━━━━━━━━━━━━━━━━━━",
+  "══════════════════════",
+  "▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰",
 ]
 
-// 🎄 100 BORDES NAVIDEÑOS RANDOM
-const XMAS_BORDES = [
-"🎄━━━━━━━━━━━━━━━━━━━━🎄","❄️━━━━━━━━━━━━━━━━━━━━❄️","🎁━━━━━━━━━━━━━━━━━━━━🎁","✨━━━━━━━━━━━━━━━━━━━━✨",
-"☃️━━━━━━━━━━━━━━━━━━━━☃️","🔔━━━━━━━━━━━━━━━━━━━━🔔","🌟━━━━━━━━━━━━━━━━━━━━🌟","🎅━━━━━━━━━━━━━━━━━━━━🎅",
-"🦌━━━━━━━━━━━━━━━━━━━━🦌","⛄━━━━━━━━━━━━━━━━━━━━⛄","🍬━━━━━━━━━━━━━━━━━━━━🍬","🎀━━━━━━━━━━━━━━━━━━━━🎀",
-"🧦━━━━━━━━━━━━━━━━━━━━🧦","🎉━━━━━━━━━━━━━━━━━━━━🎉","🍰━━━━━━━━━━━━━━━━━━━━🍰","🧁━━━━━━━━━━━━━━━━━━━━🧁",
-"📯━━━━━━━━━━━━━━━━━━━━📯","🥁━━━━━━━━━━━━━━━━━━━━🥁","🛷━━━━━━━━━━━━━━━━━━━━🛷","🌨️━━━━━━━━━━━━━━━━━━🌨️",
-"❇️━━━━━━━━━━━━━━━━━━━━❇️","🌠━━━━━━━━━━━━━━━━━━━━🌠","💝━━━━━━━━━━━━━━━━━━━━💝","💫━━━━━━━━━━━━━━━━━━━━💫",
-"🪔━━━━━━━━━━━━━━━━━━━━🪔","🕯️━━━━━━━━━━━━━━━━━━━━🕯️","🌌━━━━━━━━━━━━━━━━━━━━🌌","🎇━━━━━━━━━━━━━━━━━━━━🎇",
-"🎆━━━━━━━━━━━━━━━━━━━━🎆","🍎━━━━━━━━━━━━━━━━━━━━🍎","🍫━━━━━━━━━━━━━━━━━━━━🍫","🎶━━━━━━━━━━━━━━━━━━━━🎶",
-"🧣━━━━━━━━━━━━━━━━━━━━🧣","🧤━━━━━━━━━━━━━━━━━━━━🧤","📦━━━━━━━━━━━━━━━━━━━━📦","🦙━━━━━━━━━━━━━━━━━━━━🦙",
-"🦝━━━━━━━━━━━━━━━━━━━━🦝","🦊━━━━━━━━━━━━━━━━━━━━🦊","🦉━━━━━━━━━━━━━━━━━━━━🦉","📘━━━━━━━━━━━━━━━━━━━━📘",
-"📗━━━━━━━━━━━━━━━━━━━━📗","📙━━━━━━━━━━━━━━━━━━━━📙","📜━━━━━━━━━━━━━━━━━━━━📜","🪄━━━━━━━━━━━━━━━━━━━━🪄",
-"🎱━━━━━━━━━━━━━━━━━━━━🎱","🛎️━━━━━━━━━━━━━━━━━━━━🛎️","🧵━━━━━━━━━━━━━━━━━━━━🧵","🪢━━━━━━━━━━━━━━━━━━━━🪢",
-"🌲━━━━━━━━━━━━━━━━━━━━🌲","🎊━━━━━━━━━━━━━━━━━━━━🎊","🪅━━━━━━━━━━━━━━━━━━━━🪅","📖━━━━━━━━━━━━━━━━━━━━📖",
-"🧚━━━━━━━━━━━━━━━━━━━━🧚","🪙━━━━━━━━━━━━━━━━━━━━🪙","💖━━━━━━━━━━━━━━━━━━━━💖","💗━━━━━━━━━━━━━━━━━━━━💗",
-"💞━━━━━━━━━━━━━━━━━━━━💞","💓━━━━━━━━━━━━━━━━━━━━💓","❤️━━━━━━━━━━━━━━━━━━━━❤️","💚━━━━━━━━━━━━━━━━━━━━💚",
-"🤍━━━━━━━━━━━━━━━━━━━━🤍","🕊️━━━━━━━━━━━━━━━━━━━━🕊️","✨❄️✨❄️✨","🎄✨🎁✨🎄","❄️☃️❄️☃️❄️","🎀💝🎀💝🎀",
-"🌟🎄🌟🎄🌟","🌨️🎅🌨️🎅🌨️","🎁🔔🎁🔔🎁","❄️✨❄️✨❄️","☃️🎄☃️🎄☃️","🎅🎁🎅🎁🎅","🎄❄️🎄❄️🎄",
-"✨🧦✨🧦✨","🦌🌟🦌🌟🦌","🍬🎄🍬🎄🍬","🎀☃️🎀☃️🎀","🎄🎄🎄🎄🎄","⭐❄️⭐❄️⭐","🎅✨🎅✨🎅"
-]
-
-// Randomizador
-const deco = () => XMAS_DECO[Math.floor(Math.random() * XMAS_DECO.length)]
-const border = () => XMAS_BORDES[Math.floor(Math.random() * XMAS_BORDES.length)]
+const deco = () => DECO[Math.floor(Math.random() * DECO.length)]
+const border = () => BORDES[Math.floor(Math.random() * BORDES.length)]
 
 let handler = async (m, { conn }) => {
   try {
-    await m.react(deco()) // reacción navideña random
+    await m.react(deco())
 
-    const botName = typeof global.botname === 'string' ? global.botname : 'SantaBot'
+    const botName = typeof global.botname === 'string' ? global.botname : 'SenkuBot'
     const uptimeSec = process.uptime()
     const hours = Math.floor(uptimeSec / 3600)
     const minutes = Math.floor((uptimeSec % 3600) / 60)
@@ -49,38 +23,34 @@ let handler = async (m, { conn }) => {
     const uptimeStr = `${hours}h ${minutes}m ${seconds}s`
     const now = moment().tz('America/Bogota').format('YYYY-MM-DD HH:mm:ss')
 
-    // 🎄 TEXTO FULL ULTRA NAVIDEÑO
     const txt = `
 ${border()}
-${deco()} *🎅 𝗘𝗦𝗧𝗔𝗗𝗢 𝗡𝗔𝗩𝗜𝗗𝗘𝗡̃𝗢 𝗗𝗘𝗟 𝗕𝗢𝗧 🎄* ${deco()}
+${deco()} *⚙️ 𝗘𝗦𝗧𝗔𝗗𝗢 𝗗𝗘𝗟 𝗕𝗢𝗧 ⚙️* ${deco()}
 ${border()}
 
-${deco()} *Nombre:* ${botName}  
-${deco()} *Tiempo activo:* ${uptimeStr}  
-${deco()} *Hora navideña:* ${now}  
+${deco()} *Nombre:* ${botName}
+${deco()} *Tiempo activo:* ${uptimeStr}
+${deco()} *Hora:* ${now}
 
-${border()}
-${deco()} “La Navidad no es una fecha… ¡es una chispa en el corazón!” — 🎅✨
 ${border()}
     `.trim()
 
     const buttons = [
-      { buttonId: '.menu', buttonText: { displayText: `${deco()} 𝕸𝖊𝖓𝖚́ 𝕹𝖆𝖛𝖎𝖉𝖊𝖓̃𝖔 🎄` }, type: 1 },
-      { buttonId: '.code', buttonText: { displayText: `${deco()} 𝕾𝖊𝖗 𝕾𝖚𝖇𝖇𝖔𝖙 🎁` }, type: 1 }
+      { buttonId: '.menu', buttonText: { displayText: `${deco()} 𝕸𝖊𝖓𝖚́` }, type: 1 },
+      { buttonId: '.code', buttonText: { displayText: `${deco()} 𝕾𝖊𝖗 𝕾𝖚𝖇𝖇𝖔𝖙` }, type: 1 }
     ]
 
     const sentMsg = await conn.sendMessage(
       m.chat,
       {
         text: txt,
-        footer: `${deco()} 𝙏𝙖𝙡𝙡𝙚𝙧 𝙉𝙖𝙫𝙞𝙙𝙚𝙣̃𝙤 𝙙𝙚 SUNKU 🎅`,
+        footer: `${deco()} 𝙇𝙖𝙗𝙤𝙧𝙖𝙩𝙤𝙧𝙞𝙤 𝙙𝙚 𝙎𝙚𝙣𝙠𝙪`,
         buttons,
         headerType: 1
       },
       { quoted: m }
     )
 
-    // Auto-borrado
     setTimeout(async () => {
       try {
         await conn.sendMessage(m.chat, { delete: sentMsg.key })
@@ -94,7 +64,7 @@ ${border()}
   } catch (err) {
     console.error(err)
     await m.react('💥')
-    conn.reply(m.chat, `${deco()} 🎄 *Error navideño inesperado*`, m)
+    conn.reply(m.chat, `${deco()} ⚠️ *Error inesperado*`, m)
   }
 }
 
