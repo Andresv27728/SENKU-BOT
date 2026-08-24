@@ -1,4 +1,3 @@
-
 <div align="center"
 style="
 border: 4px solid;
@@ -17,8 +16,8 @@ padding: 18px;
 border-radius: 14px;
 ">
 
-# 🧪⚡ **SENKU-BOT** ⚡🧪  
-### *¡10 mil millones por ciento funcional!*
+# ð§ªâ¡ **SENKU-BOT** â¡ð§ª  
+### *Â¡10 mil millones por ciento funcional!*
 
 <img src="https://img.shields.io/badge/Node.js-18%2B-brightgreen?style=for-the-badge&logo=node.js" />
 <img src="https://img.shields.io/badge/Baileys-Latest-blue?style=for-the-badge" />
@@ -33,132 +32,63 @@ border-radius: 14px;
 
 </div>
 
----
+--- 
 
 <div align="center">
 
-🧠 **CIENCIA • LÓGICA • INNOVACIÓN**  
-🤖 **BOT DE WHATSAPP EN NODE.JS**
+ð§  **CIENCIA â¢ LÃGICA â¢ INNOVACIÃN**  
+ð¤ **BOT DE WHATSAPP EN NODE.JS**
 
 </div>
 
----
+--- 
 
-> *“La ciencia lo puede todo.”*  
-> **SENKU-BOT** es un bot de WhatsApp inspirado en **Senku Ishigami**, creado para experimentar, automatizar y llevar la lógica al máximo nivel.
+> *âLa ciencia lo puede todo.â*  
+> **SENKU-BOT** es un bot de WhatsApp inspirado en **Senku Ishigami**, creado para experimentar, automatizar y llevar la lÃ³gica al mÃ¡ximo nivel.
 
----
+--- 
 
-## 🧬 **Funciones Principales**
+## ð§¬ **Funciones Principales**
 
-🧪 Sistema de plugins  
-⚙️ Comandos rápidos y eficientes  
-📥 Descargas de audio y video  
-🎨 Menús decorados  
-🧠 Código organizado  
-⚡ Rendimiento estable.  
+ð§ª Sistema de plugins  
+âï¸ Comandos rÃ¡pidos y eficientes  
+ð¥ Descargas de audio y video (TikTok, Facebook, Instagram)  
+ð¨ MenÃºs decorados  
+ð§  CÃ³digo organizado  
+â¡ Rendimiento estable 24/7  
 
----
+--- 
 
-<div align="center"
-style="
-border: 3px solid;
-border-image: linear-gradient(
-  90deg,
-  cyan,
-  lime,
-  yellow,
-  orange,
-  red,
-  magenta,
-  cyan
-) 1;
-padding: 14px;
-border-radius: 12px;
-">
+## ð **InstalaciÃ³n RÃ¡pida**
 
-## 🌍 **Dónde activar SENKU-BOT**
+Para iniciar tu propio laboratorio, clona el repositorio:
 
-</div>
+```bash
+git clone https://github.com/Andresv27728/SENKU-BOT
+cd SENKU-BOT
+npm install
+npm start
+```
 
-```¿Buscas un hosting que realmente funcione?```
+--- 
 
-En **SwalloX Host** puedes **encontrar SENKU-BOT disponible para instalar** y ejecutarlo fácilmente desde su panel, manteniéndolo activo **24/7** como un verdadero laboratorio científico.
+## ð **DÃ³nde activar SENKU-BOT**
 
-🧪 Desde el panel podrás:
-- Importar el bot desde GitHub  
-- Instalar dependencias automáticamente  
-- Administrar archivos y consola  
-- Mantener el bot siempre activo  
+En **SwalloX Host** puedes encontrar SENKU-BOT disponible para instalar y ejecutarlo fÃ¡cilmente desde su panel.
 
----
+ð¬ **Dashboard:** https://dash.swallox.com  
+ð§° **Panel:** https://panel.swallox.com
 
-<div align="center">
+--- 
 
-### ⚡ **Accesos al Laboratorio**
+## â­ **Apoya el Proyecto**
 
-</div>
+Si **SENKU-BOT** te parece increÃ­ble:
+- â­ Dale una estrella al repositorio  
+- ð CompÃ¡rtelo  
+- ð§  Contribuye con ideas  
 
-🔬 **Dashboard:**  
-https://dash.swallox.com  
-
-🧰 **Panel:**  
-https://panel.swallox.com  
-
----
-
-<div align="center"
-style="
-border: 3px solid;
-border-image: linear-gradient(
-  120deg,
-  lime,
-  cyan,
-  blue,
-  magenta,
-  red,
-  orange,
-  lime
-) 1;
-padding: 14px;
-border-radius: 12px;
-">
-
-## 🧪 **Comunidad Oficial SwalloX Host**
-
-</div>
-
-🧠 _Canales oficiales del host donde también encontrarás soporte para SENKU-BOT_
-
-🏷️ **Canal + Grupo:**  
-https://whatsapp.com/channel/0029Vb6I6zTEQIanas9U0N2I  
-https://chat.whatsapp.com/Bzo7jcdivDGJc3thZrSyEC  
-
----
-
-<div align="center">
-
-## 👨‍🔬 **Creador**
-
-</div>
-
-🧪 **Andresv27728**  
-https://github.com/Andresv27728  
-
----
-
-<div align="center">
-
-## ⭐ **Apoya el Proyecto**
-
-</div>
-
-🔬 Si **SENKU-BOT** te parece increíble:
-- ⭐ Dale una estrella al repositorio  
-- 🔁 Compártelo  
-- 🧠 Contribuye con ideas  
-
----
+--- 
 
 <div align="center"
 style="
@@ -177,7 +107,7 @@ padding: 16px;
 border-radius: 16px;
 ">
 
-### ⚡ *¡Esto es ciencia pura!* ⚡  
-### *¡10 mil millones por ciento real!* 🧪
+### â¡ *Â¡Esto es ciencia pura!* â¡  
+### *Â¡10 mil millones por ciento real!* ð§ª
 
 </div>
