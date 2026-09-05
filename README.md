@@ -32,7 +32,7 @@ border-radius: 14px;
 
 </div>
 
---- 
+---
 
 <div align="center">
 
@@ -41,12 +41,12 @@ border-radius: 14px;
 
 </div>
 
---- 
+---
 
 > *âLa ciencia lo puede todo.â*  
 > **SENKU-BOT** es un bot de WhatsApp inspirado en **Senku Ishigami**, creado para experimentar, automatizar y llevar la lÃ³gica al mÃ¡ximo nivel.
 
---- 
+---
 
 ## ð§¬ **Funciones Principales**
 
@@ -57,7 +57,7 @@ border-radius: 14px;
 ð§  CÃ³digo organizado  
 â¡ Rendimiento estable 24/7  
 
---- 
+---
 
 ## ð **InstalaciÃ³n RÃ¡pida**
 
@@ -70,7 +70,7 @@ npm install
 npm start
 ```
 
---- 
+---
 
 ## ð **DÃ³nde activar SENKU-BOT**
 
@@ -79,7 +79,7 @@ En **SwalloX Host** puedes encontrar SENKU-BOT disponible para instalar y ejecut
 ð¬ **Dashboard:** https://dash.swallox.com  
 ð§° **Panel:** https://panel.swallox.com
 
---- 
+---
 
 ## â­ **Apoya el Proyecto**
 
@@ -88,7 +88,29 @@ Si **SENKU-BOT** te parece increÃ­ble:
 - ð CompÃ¡rtelo  
 - ð§  Contribuye con ideas  
 
---- 
+---
+
+## ð **DocumentaciÃ³n del CÃ³digo**
+
+### Arquitectura del Bot
+- **`index.js`**: Punto de entrada principal, inicializa el servidor, conecta con Baileys y carga los plugins.
+- **`handler.js`**: El corazón del bot, gestiona todos los eventos de mensajes entrantes, validación de permisos, y ejecución de plugins.
+- **`lib/simple.js`**: Contiene métodos auxiliares y decoradores para facilitar la interacción con la API de Baileys (ej. `sendFile`, `reply`, `sendButton`).
+- **`plugins/`**: Contiene la lógica modular de cada comando. Cada archivo exporta un objeto `handler` que debe incluir `command` y `help`.
+
+### Guía para Desarrolladores
+Para añadir un nuevo comando, crea un archivo `.js` dentro de la carpeta `plugins/` siguiendo este patrón:
+
+```javascript
+let handler = async (m, { conn, text, usedPrefix }) => {
+  // Lógica del comando
+  m.reply('¡Ciencia aplicada!')
+}
+handler.command = ['test']
+export default handler
+```
+
+---
 
 <div align="center"
 style="
