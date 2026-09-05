@@ -10,6 +10,10 @@
 <img src="https://img.shields.io/badge/Ciencia-10000%25-brightgreen?style=flat" />
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ABSphreak/ABSphreak/master/gifs/Ghost.gif" width="200" />
+</p>
+
 --- 
 
 ### 🧬 Bienvenido al Laboratorio
@@ -57,10 +61,13 @@ npm start
 *   `lib/`: Bibliotecas de funciones esenciales.
 *   `plugins/`: Aquí reside la lógica aplicada de cada comando.
 
---- 
+---
 
-> *"El progreso humano es una serie de experimentos."
-> 🔬 ¡Haz tuya la ciencia!*
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=00ff00&width=435&lines=¡La+ciencia+lo+puede+todo!;%22El+progreso+humano+es+una+serie+de+experimentos.%22" alt="Typing SVG" />
+</p>
+
+> 🔬 ¡Haz tuya la ciencia!
 
 <a href="https://wa.me/573133374132">
   <img src="https://img.shields.io/badge/Soporte-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
