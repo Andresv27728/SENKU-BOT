@@ -29,7 +29,19 @@
 
 ### ⚙️ Instalación Rápida
 
+#### PC (Linux/Windows)
 ```bash
+git clone https://github.com/Andresv27728/SENKU-BOT
+cd SENKU-BOT
+npm install
+npm start
+```
+
+#### Termux
+```bash
+termux-setup-storage
+pkg update && pkg upgrade
+pkg install git nodejs ffmpeg imagemagick libwebp -y
 git clone https://github.com/Andresv27728/SENKU-BOT
 cd SENKU-BOT
 npm install
@@ -48,7 +60,7 @@ npm start
 --- 
 
 > *"El progreso humano es una serie de experimentos."
-> 🔬 ¡Haz tuya la ciencia!* 
+> 🔬 ¡Haz tuya la ciencia!*
 
 <a href="https://wa.me/573133374132">
   <img src="https://img.shields.io/badge/Soporte-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
